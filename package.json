@@ -19,6 +19,7 @@
     "vite": "^4.4.9"
   },
   "dependencies": {
+    "@ark-ui/solid": "^1.1.0",
     "@solidjs/meta": "^0.29.1",
     "@solidjs/router": "^0.8.3",
     "clsx": "^2.0.0",
