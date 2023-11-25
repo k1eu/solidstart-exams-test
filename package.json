@@ -21,8 +21,10 @@
   "dependencies": {
     "@solidjs/meta": "^0.29.1",
     "@solidjs/router": "^0.8.3",
+    "clsx": "^2.0.0",
     "solid-js": "^1.8.5",
-    "solid-start": "^0.3.10"
+    "solid-start": "^0.3.10",
+    "tailwind-merge": "^2.0.0"
   },
   "engines": {
     "node": ">=18"

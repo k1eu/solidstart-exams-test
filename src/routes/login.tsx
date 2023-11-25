@@ -8,6 +8,7 @@ import {
 } from "solid-start/server";
 import { db } from "~/db";
 import { createUserSession, getUser, login, register } from "~/db/session";
+import { cx } from "~/utils/css";
 
 function validateUsername(username: unknown) {
   if (typeof username !== "string" || username.length < 3) {
@@ -93,7 +94,7 @@ export default function Login() {
 
   return (
     <main>
-      <h1 class="font-bold">Login</h1>
+      <h1 class={cx("font-bold", true && "font-thin")}>Login</h1>
       <Form>
         <input
           type="hidden"
