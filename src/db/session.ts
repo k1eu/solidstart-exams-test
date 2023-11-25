@@ -1,26 +1,44 @@
 import { redirect } from "solid-start/server";
 import { createCookieSessionStorage } from "solid-start/session";
 import { db } from ".";
+import { users } from "./schema";
+import { eq } from "drizzle-orm";
+import bcrypt from "bcrypt-ts";
+
 type LoginForm = {
   email: string;
   password: string;
 };
 
 export async function register({ email, password }: LoginForm) {
-  return db.user.create({
-    data: { email: email, password },
-  });
+  const encryptedPassword = await bcrypt.hash(password, 10);
+  const [user] = await db
+    .insert(users)
+    .values({
+      email,
+      encryptedPassword: password,
+    })
+    .returning();
+  return user;
 }
 
 export async function login({ email, password }: LoginForm) {
-  const user = await db.user.findUnique({ where: { email } });
+  const user = await db.query.users.findFirst({
+    where: eq(users.email, email),
+  });
   if (!user) return null;
-  const isCorrectPassword = password === user.password;
+  const isCorrectPassword = await bcrypt.compare(
+    password,
+    user.encryptedPassword
+  );
   if (!isCorrectPassword) return null;
   return user;
 }
 
+//@ts-expect-error TODO: add types
 const sessionSecret = import.meta.env.SESSION_SECRET;
+
+console.log({ sessionSecret });
 
 const storage = createCookieSessionStorage({
   cookie: {
@@ -67,7 +85,9 @@ export async function getUser(request: Request) {
   }
 
   try {
-    const user = await db.user.findUnique({ where: { id: Number(userId) } });
+    const user = await db.query.users.findFirst({
+      where: eq(users.id, parseInt(userId)),
+    });
     return user;
   } catch {
     throw logout(request);

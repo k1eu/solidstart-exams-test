@@ -14,6 +14,9 @@ dependencies:
   '@solidjs/router':
     specifier: ^0.8.3
     version: 0.8.4(solid-js@1.8.6)
+  bcrypt-ts:
+    specifier: ^5.0.0
+    version: 5.0.0
   better-sqlite3:
     specifier: ^9.1.1
     version: 9.1.1
@@ -23,6 +26,9 @@ dependencies:
   drizzle-orm:
     specifier: ^0.29.0
     version: 0.29.0(@types/better-sqlite3@7.6.8)(better-sqlite3@9.1.1)
+  drizzle-zod:
+    specifier: ^0.5.1
+    version: 0.5.1(drizzle-orm@0.29.0)(zod@3.22.4)
   solid-js:
     specifier: ^1.8.5
     version: 1.8.6
@@ -70,6 +76,9 @@ devDependencies:
   tailwindcss:
     specifier: ^3.3.5
     version: 3.3.5
+  tsx:
+    specifier: ^4.5.0
+    version: 4.5.0
   typescript:
     specifier: ^4.9.5
     version: 4.9.5
@@ -2651,6 +2660,11 @@ packages:
     resolution: {integrity: sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==}
     dev: false
 
+  /bcrypt-ts@5.0.0:
+    resolution: {integrity: sha512-0+VFzpOk0oIw8W8DfcCl0+xYbM04ib1u9IqkJCQQr+Vx8Pie4wzXmow+4zEnU0SP72QgPACDn0ARybH7q95Cbw==}
+    engines: {node: '>=18'}
+    dev: false
+
   /better-sqlite3@9.1.1:
     resolution: {integrity: sha512-FhW7bS7cXwkB2SFnPJrSGPmQerVSCzwBgmQ1cIRcYKxLsyiKjljzCbyEqqhYXo5TTBqt5BISiBj2YE2Sy2ynaA==}
     requiresBuild: true
@@ -3111,6 +3125,16 @@ packages:
     dependencies:
       '@types/better-sqlite3': 7.6.8
       better-sqlite3: 9.1.1
+    dev: false
+
+  /drizzle-zod@0.5.1(drizzle-orm@0.29.0)(zod@3.22.4):
+    resolution: {integrity: sha512-C/8bvzUH/zSnVfwdSibOgFjLhtDtbKYmkbPbUCq46QZyZCH6kODIMSOgZ8R7rVjoI+tCj3k06MRJMDqsIeoS4A==}
+    peerDependencies:
+      drizzle-orm: '>=0.23.13'
+      zod: '*'
+    dependencies:
+      drizzle-orm: 0.29.0(@types/better-sqlite3@7.6.8)(better-sqlite3@9.1.1)
+      zod: 3.22.4
     dev: false
 
   /ee-first@1.1.1:
@@ -4931,6 +4955,17 @@ packages:
 
   /tslib@2.6.2:
     resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
+
+  /tsx@4.5.0:
+    resolution: {integrity: sha512-hgxdziy9KLaHh9KE+a6tIZFP6kb0MLq/1D0sJVifbGP4QVEYhy6+2FNn7MyCm1pMc63p9CW/L1OzdqTNPxs6rg==}
+    engines: {node: '>=18.0.0'}
+    hasBin: true
+    dependencies:
+      esbuild: 0.18.20
+      get-tsconfig: 4.7.2
+    optionalDependencies:
+      fsevents: 2.3.3
+    dev: true
 
   /tunnel-agent@0.6.0:
     resolution: {integrity: sha512-McnNiV1l8RYeY8tBgEpuodCC1mLUdbSN+CYBL7kJsJNInOP8UjDDEwdk6Mw60vdLLrr5NHKZhMAOSrR2NZuQ+w==}

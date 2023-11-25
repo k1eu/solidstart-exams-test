@@ -10,6 +10,8 @@ import {
 import { db } from "~/db";
 import { createUserSession, getUser, login, register } from "~/db/session";
 import { z } from "zod";
+import { eq } from "drizzle-orm";
+import { users } from "~/db/schema";
 
 const AuthType = z.enum(["login", "register"]);
 
@@ -114,9 +116,10 @@ function LoginForm({ params }: { params: Params }) {
         return createUserSession(`${user.id}`, redirectTo);
       }
       case "register": {
-        const userExists = await db.user.findUnique({
-          where: { email },
+        const userExists = await db.query.users.findFirst({
+          where: eq(users.email, email),
         });
+
         if (userExists) {
           throw new FormError(`User with email ${email} already exists`, {
             fields,
@@ -138,6 +141,7 @@ function LoginForm({ params }: { params: Params }) {
       }
     }
   });
+
   return (
     <Form class="flex flex-col gap-6">
       <input type="hidden" name="redirectTo" value={params.redirectTo ?? "/"} />
