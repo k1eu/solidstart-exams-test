@@ -26,7 +26,7 @@ export default function Home() {
 
   return (
     <main class="w-full p-4 space-y-2">
-      <h1 class="font-bold text-3xl">Hello {user()?.username}</h1>
+      <h1 class="font-bold text-3xl">Hello {user()?.email}</h1>
       <h3 class="font-bold text-xl">Message board</h3>
       <Form>
         <button name="logout" type="submit">

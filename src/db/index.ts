@@ -1,20 +1,20 @@
-let users = [{ id: 0, username: "kody", password: "twixrox" }];
+let users = [{ id: 0, email: "kody@example.com", password: "twixrox" }];
 export const db = {
   user: {
-    async create({ data }: { data: { username: string; password: string } }) {
+    async create({ data }: { data: { email: string; password: string } }) {
       let user = { ...data, id: users.length };
       users.push(user);
       return user;
     },
     async findUnique({
-      where: { username = undefined, id = undefined },
+      where: { email = undefined, id = undefined },
     }: {
-      where: { username?: string; id?: number };
+      where: { email?: string; id?: number };
     }) {
       if (id !== undefined) {
         return users.find((user) => user.id === id);
       } else {
-        return users.find((user) => user.username === username);
+        return users.find((user) => user.email === email);
       }
     },
   },
